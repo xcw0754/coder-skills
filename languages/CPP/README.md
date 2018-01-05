@@ -13,3 +13,6 @@
 - #pragma once 与 #ifndef	`CPP-102-pragma-once-and-ifndef.md`
 - sizeof注意点	`CPP-103-sizeof.md`
 - 虚函数与纯虚函数 `CPP-104-virtual-function.md`
+- 类型别名#typedef	`CPP-105-typedef.md`
+- 未初始化的变量	`CPP-106-uninitialized.md`
+- 静态变量static	`CPP-107-static.md`
