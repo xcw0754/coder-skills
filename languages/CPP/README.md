@@ -16,3 +16,4 @@
 - 类型别名#typedef	`CPP-105-typedef.md`
 - 未初始化的变量	`CPP-106-uninitialized.md`
 - 静态变量static	`CPP-107-static.md`
+- 构造函数陷阱	`CPP-108-constructer.md`
