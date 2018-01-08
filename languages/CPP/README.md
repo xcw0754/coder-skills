@@ -17,3 +17,4 @@
 - 未初始化的变量	`CPP-106-uninitialized.md`
 - 静态变量static	`CPP-107-static.md`
 - 构造函数陷阱	`CPP-108-constructer.md`
+- define和inline函数的区别	`CPP-109-inline-and-define.md`
