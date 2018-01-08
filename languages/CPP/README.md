@@ -18,3 +18,12 @@
 - 静态变量static	`CPP-107-static.md`
 - 构造函数陷阱	`CPP-108-constructer.md`
 - define和inline函数的区别	`CPP-109-inline-and-define.md`
+
+
+
+-----
+### C++易漏细节(坑)
+均在文件 `CPP-200-details.md`
+- 数组的地址
+- 字符串的地址
+
