@@ -23,7 +23,7 @@
 -----
 ### C++11
 
-- 智能指针shared_ptr、unique_ptr、weak_ptr.	`CPP-301- intelligent-pointer.md`
+- 智能指针	`CPP-301- intelligent-pointer.md`
 
 
 -----

@@ -1,9 +1,11 @@
-# 智能指针shared_ptr、unique_ptr、weak_ptr
+# 智能指针
 
 
 ### 简介
-三者均在头文件memory中，智能的地方在于它会在适当的时候释放指针所指向的内存，其实就是用了个引用计数，当计数为0时就会释放。线程安全。
-而只有深入了解"智能"的原理，才能用好智能指针，否则下场有点不明不白。
+shared_ptr、unique_ptr、weak_ptr均在头文件memory中，是`std`的一部分，智能的地方在于它会在适当的时候释放指针所指向的内存，其实就是用了个引用计数，当计数为0时就会释放。线程安全。其实还有auto_ptr，scoped_ptr，只不过它们可以被以上3种更好的替代。
+简单說說auto_ptr，它没有引用计数，它可以被共享，但是共享仅局限于"这个对象要么你用，要么我用，我们不能同时用"。至于它和unique_ptr有什么区别，待了解。
+简单说说scoped_ptr，它和unique_ptr的区别是unique_ptr可以将指向的对象所有权转移，而scoped_ptr不行，只会在其销毁时释放内存。
+
 
 -----
 ### shared_ptr类
@@ -88,6 +90,7 @@ int *p = new int[n];
 -----
 ### weak_ptr
 是一种智能指针，指向由shared_ptr管理的对象，而shared_ptr的use_count()不会将weak_ptr所引用的次数算在内。
+关于它的作用，可以参考[C++四种智能指针小结](http://blog.csdn.net/e5max/article/details/50569305),其中提到了交叉循环引用时shared_ptr未能正确释放内存。
 
 
 
