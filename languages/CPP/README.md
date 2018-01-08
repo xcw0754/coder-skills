@@ -20,6 +20,11 @@
 - define和inline函数的区别	`CPP-109-inline-and-define.md`
 
 
+-----
+### C++11
+
+- 智能指针shared_ptr、unique_ptr、weak_ptr.	`CPP-301- intelligent-pointer.md`
+
 
 -----
 ### C++易漏细节(坑)
