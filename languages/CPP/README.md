@@ -19,12 +19,13 @@
 - 构造函数陷阱	`CPP-108-constructer.md`
 - define和inline函数的区别	`CPP-109-inline-and-define.md`
 - 虚继承和棱形继承	`CPP-110-virtual-inherit.md`
+- 继承和组合的使用时机	`CPP-110-inherit-or-combination.md`
 
 -----
 ### C++11
 
-- 智能指针	`CPP-301- intelligent-pointer.md`
-
+- 智能指针	`CPP-301-intelligent-pointer.md`
+- 类型说明符auto和decltype	`CPP-301-type-declare.md`
 
 -----
 ### C++易漏细节(坑)

@@ -6,8 +6,8 @@
 ```
 namespace myspace {
 	Class A {...};	// 一般是类的定义和声明
-    Class B {...};
-    ...
+	Class B {...};
+	...
 }  // <--- 没有分号
 ```
 
@@ -33,7 +33,7 @@ namespace ns2{
 >>> 文件 my_ns.h
 namespace ns{
 	#include "my_ns1.h"		// 将两个命名空间嵌在里边
-    #include "my_ns2.h"
+	#include "my_ns2.h"
 }
 ```
 
@@ -50,7 +50,7 @@ namespace {		// <--- 没有指定名字
 	...
 }
 ```
-- 可以取代static，将所有的static变量丢里面，不同再声明为static了，效果一样。
+- 可以取代static，将所有的静态全局变量丢里面，且不需再声明为static了，效果是一样的。
 - 可以关注一下如果在头文件中定义static实体会怎样。(每个引用此头文件的文件都会有各自的副本)
 
 
