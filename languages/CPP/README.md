@@ -19,7 +19,7 @@
 - 构造函数陷阱	`CPP-108-constructer.md`
 - define和inline函数的区别	`CPP-109-inline-and-define.md`
 - 虚继承和棱形继承	`CPP-110-virtual-inherit.md`
-- 继承和组合的使用时机	`CPP-110-inherit-or-combination.md`
+- 继承和组合的使用时机	`CPP-111-inherit-or-combination.md`
 
 -----
 ### C++11
@@ -32,4 +32,5 @@
 均在文件 `CPP-200-details.md`
 - 数组的地址
 - 字符串的地址
+- 指针的大小
 
