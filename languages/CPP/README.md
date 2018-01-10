@@ -27,6 +27,12 @@
 - 智能指针	`CPP-301-intelligent-pointer.md`
 - 类型说明符auto和decltype	`CPP-301-type-declare.md`
 
+
+-----
+### 工具
+
+- 编译流程	`CPP-401-compile-procedure.md`
+
 -----
 ### C++易漏细节(坑)
 均在文件 `CPP-200-details.md`
