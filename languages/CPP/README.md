@@ -25,7 +25,7 @@
 ### C++11
 
 - 智能指针	`CPP-301-intelligent-pointer.md`
-- 类型说明符auto和decltype	`CPP-301-type-declare.md`
+- 类型说明符auto和decltype	`CPP-302-type-declare.md`
 
 
 -----
