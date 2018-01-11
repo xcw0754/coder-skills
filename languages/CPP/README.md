@@ -21,6 +21,8 @@
 - 虚继承和棱形继承	`CPP-110-virtual-inherit.md`
 - 继承和组合的使用时机	`CPP-111-inherit-or-combination.md`
 - volatile关键字	`CPP-112-volatile.md`
+- const关键字	`CPP-113-const.md`
+- new和delete关键字	`CPP-114-new.md`
 
 -----
 ### C++11
