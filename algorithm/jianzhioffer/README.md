@@ -7,3 +7,5 @@
 - 面试题16：反转链表	`AL-offer-16-reverse-list.md`
 - 面试题17：合并两个排序的链表	`AL-offer-17-merge-list.md`
 - 面试题19：二叉树的镜像	`AL-offer-19-binary-tree-mirror.md`
+- 面试题22：栈的压入、弹出序列	`AL-offer-22-stack-push-pop.md`
+- 面试题24：二叉搜索树的后续遍历序列	`AL-offer-24-post-order.md`
