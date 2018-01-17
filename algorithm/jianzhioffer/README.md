@@ -11,3 +11,4 @@
 - 面试题24：二叉搜索树的后续遍历序列	`AL-offer-24-post-order.md`
 - 面试题26：复杂链表的复制	`AL-offer-26-copy-complex-list.md`
 - 面试题27：二叉搜索树与双向链表	`AL-offer-27-double-edge-list.md`
+- 面试题31：连续子数组的最大和	`AL-offer-31-maxsum-of-subarray.md`
