@@ -92,6 +92,9 @@ int *p = new int[n];
 是一种智能指针，指向由shared_ptr管理的对象，而shared_ptr的use_count()不会将weak_ptr所引用的次数算在内。
 关于它的作用，可以参考[C++四种智能指针小结](http://blog.csdn.net/e5max/article/details/50569305),其中提到了交叉循环引用时shared_ptr未能正确释放内存。
 
+-----
+Tips： 数组的名称其实是个指针，只是已经被绑定到该地址上而已，`int a[10]`等同于`int * const a`，不能改变指向的指针。
+
 
 
 
