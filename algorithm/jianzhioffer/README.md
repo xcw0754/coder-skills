@@ -12,5 +12,6 @@
 - 面试题26：复杂链表的复制	`AL-offer-26-copy-complex-list.md`
 - 面试题27：二叉搜索树与双向链表	`AL-offer-27-double-edge-list.md`
 - 面试题31：连续子数组的最大和	`AL-offer-31-maxsum-of-subarray.md`
+- 面试题32：从1到n整数中1出现的次数	`AL-offer-32-count-digit-one.md`
 - 面试题33：把数组排成最小的数	`AL-offer-33-sort-array.md`
 - 面试题34：丑数	`AL-offer-34-ugly-number.md`
