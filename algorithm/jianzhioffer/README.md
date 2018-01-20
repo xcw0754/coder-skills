@@ -15,3 +15,5 @@
 - 面试题32：从1到n整数中1出现的次数	`AL-offer-32-count-digit-one.md`
 - 面试题33：把数组排成最小的数	`AL-offer-33-sort-array.md`
 - 面试题34：丑数	`AL-offer-34-ugly-number.md`
+- 面试题35：第一个只出现一次的字符	`AL-offer-35-only-emerge-once.md`
+- 面试题36：数组中的逆序对	`AL-offer-36-inverse-pairs.md`
