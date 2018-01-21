@@ -17,3 +17,6 @@
 - 面试题34：丑数	`AL-offer-34-ugly-number.md`
 - 面试题35：第一个只出现一次的字符	`AL-offer-35-only-emerge-once.md`
 - 面试题36：数组中的逆序对	`AL-offer-36-inverse-pairs.md`
+- 面试题37：两个链表的第一个公共结点	`AL-offer-37-find-first-common-node.md`
+- 面试题40：数组中只出现一次的数字	`AL-offer-40-number-appear-once.md`
+- 面试题41：和为s的两个数字	`AL-offer-41-find-nums-with-sum.md`
