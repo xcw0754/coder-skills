@@ -29,7 +29,7 @@
 
 - 智能指针	`CPP-301-intelligent-pointer.md`
 - 类型说明符auto和decltype	`CPP-302-type-declare.md`
-
+- 类型转换cast	`CPP-303-type-cast.md`
 
 -----
 ### 工具
