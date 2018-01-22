@@ -20,9 +20,12 @@ Q5：拿出一叠密密麻麻的卡片写着各种结构体的定义，sizeof(�
 > ###### 设结构体Y中的某个变量为x，其地址为`&x`，`big=max{sizeof(x)}`则有
 > - 首先，`(&x) % sizeof(x) = 0`，即x的地址必须能整除x。
 > - 其次，`sizeof(Y) = big × k`，其中k为整数，为我们所要求。
-
-> 两条规则同时满足即可。看一些实例可参考此文 [内存对齐规则之我见](https://levphy.github.io/2017/03/23/memory-alignment.html)。
-> 注：GNU C 提供了`__attribute__((packed))`用于取消内存对齐。
+>
+> 两条规则同时满足即可。
+> 注：
+> 1. 看一些实例可参考此文 [内存对齐规则之我见](https://levphy.github.io/2017/03/23/memory-alignment.html)。
+> 2. GNU C 提供了`__attribute__((packed))`用于取消内存对齐。
+> 3. 一般编译器都会提供`#pragma pack`预编译指令，可以指定对齐的原则。如`#pragma pack(1)`就相当于取消内存对齐。
 
 
 
