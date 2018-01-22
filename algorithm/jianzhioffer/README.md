@@ -20,3 +20,5 @@
 - 面试题37：两个链表的第一个公共结点	`AL-offer-37-find-first-common-node.md`
 - 面试题40：数组中只出现一次的数字	`AL-offer-40-number-appear-once.md`
 - 面试题41：和为s的两个数字	`AL-offer-41-find-nums-with-sum.md`
+- 面试题41：和为s的连续正数序列	`AL-offer-41-find-continuous-sequence.md`
+- 面试题42：翻转单词顺序	`AL-offer-42-reverse-sentence.md`
