@@ -23,3 +23,4 @@
 - 面试题41：和为s的连续正数序列	`AL-offer-41-find-continuous-sequence.md`
 - 面试题42：翻转单词顺序	`AL-offer-42-reverse-sentence.md`
 - 面试题45：圆圈中最后剩下的数字	`AL-offer-45-circle-remain-number.md`
+- 面试题47：不用加减乘除作加法	`AL-offer-47-sum-without-operator.md`
