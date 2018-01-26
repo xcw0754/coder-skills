@@ -25,3 +25,4 @@
 - 面试题45：圆圈中最后剩下的数字	`AL-offer-45-circle-remain-number.md`
 - 面试题47：不用加减乘除作加法	`AL-offer-47-sum-without-operator.md`
 - 面试题51：数组中重复的数字	`AL-offer-51-duplicate-in-array.md`
+- 面试题53：正则表达式匹配	`AL-offer-53-match-text.md`
