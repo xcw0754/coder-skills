@@ -134,7 +134,7 @@ int a = 0;
 #define yyy //表示定义yyy，没有替换
 #endif
 ```
-
+4. `#if defined(xxx) && (1!=2)` 这种写法也容易理解，还能并列写多个表达式，而defined跟函数的使用方式一样。
 
 
 
