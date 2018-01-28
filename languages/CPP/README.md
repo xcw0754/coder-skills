@@ -31,6 +31,8 @@
 - 智能指针	`CPP-301-intelligent-pointer.md`
 - 类型说明符auto和decltype	`CPP-302-type-declare.md`
 - 类型转换cast	`CPP-303-type-cast.md`
+- 循环新写法 for-range loop	`CPP-304-for-range-loop.md`
+- POD、Trival、Standard Layout	`CPP-305-pod-trival-layout.md`
 
 -----
 ### 编译
@@ -43,11 +45,13 @@
 - 内存池	`CPP-501-memory-alloc.md`
 
 -----
-### C++易漏细节(坑)
+### C++的细节(坑)
+
 均在文件 `CPP-200-details.md`
 - 数组的地址
 - 字符串的地址
 - 指针的大小
 - 必须初始化的成员变量
+- new和new()的区别
 - 结构体的末尾定义一个空数组
 - 不用乘除法实现向上取整至n的倍数。
