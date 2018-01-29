@@ -30,3 +30,4 @@
 - 面试题56：链表中环的入口结点	`AL-offer-56-entry-node-of-loop.md`
 - 面试题58：二叉树的下一个节点	`AL-offer-58-binary-tree-get-next.md`
 - 面试题59：对称的二叉树	`AL-offer-59-binary-tree-is-symmetrical.md`
+- 面试题61：按之字形顺序打印二叉树	`AL-offer-61-binary-tree-print.md`
