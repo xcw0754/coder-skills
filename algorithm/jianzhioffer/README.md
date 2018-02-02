@@ -32,3 +32,4 @@
 - 面试题58：二叉树的下一个节点	`AL-offer-58-binary-tree-get-next.md`
 - 面试题59：对称的二叉树	`AL-offer-59-binary-tree-is-symmetrical.md`
 - 面试题61：按之字形顺序打印二叉树	`AL-offer-61-binary-tree-print.md`
+- 面试题65：滑动窗口的最大值	`AL-offer-65-max-in-windows.md`
