@@ -69,9 +69,14 @@ Redis的key都是字符串，二进制安全。
 - Redis清除过期key的过程是怎样的？
 - Redis的安全性如何？
 - Redis中的AOF重写是怎样实现的？
-- Redis中有哪些进程和线程？各自的作用是什么？(未)
-- Redis中服务端和客户端的网络通信使用什么协议通信？如何加密？(未)
-- Redis的事件驱动(未)
+- Redis的主从架构是怎样的？
+- Redis的集群架构是怎样的？
+- Redis的复制过程是怎样的？
+- Sentile如何判断某台Redis是否下线？如何选举领头Sentile？
+- Redis中有哪些和线程？各自的作用是什么？
+- Redis中服务端和客户端的网络通信使用什么协议通信？
+- Redis的事件驱动是怎样的？
+
 
 
 #### Q：Redis的事务是怎样的？
@@ -98,16 +103,14 @@ Redis的key都是字符串，二进制安全。
 
 #### Q：Redis支持的过期策略是怎样的？有哪些？
 > A：内存不足时，Redis支持自动某些key以保证能够继续存储新数据。此功能在`redis.conf`文件中配置`maxmemory policy`项，有如下几种选择。
->
-- `volatile-lru`  用LRU算法，设置过expire的key可能被清，没设置过就不会被清。
-- `allkeys-lru`   用LRU算法，所有key都可能被移除，即使没有设置过expire。
-- `volatile-lfu`  用LFU算法，设置过expire的key可能被清，没设置过就不会被清。
-- `allkeys-lfu`   用LFU算法，所有key都可能被移除，即使没有设置过expire。
-- `volatile-random`  随机算法，设置过expire的key都可能被清，小心使用。
-- `allkeys-random`   随机算法，所有key都可能被移除，即使没有设置过expire，小心使用。
-- `volatile-ttl`     设置过expire的那些key，具有TTL最小的key会被清。
-- `noeviction(默认)`  无自动删除操作，内存使用到达上限时的写操作会被禁止。
->
+> - `volatile-lru`  用LRU算法，设置过expire的key可能被清，没设置过就不会被清。
+> - `allkeys-lru`   用LRU算法，所有key都可能被移除，即使没有设置过expire。
+> - `volatile-lfu`  用LFU算法，设置过expire的key可能被清，没设置过就不会被清。
+> - `allkeys-lfu`   用LFU算法，所有key都可能被移除，即使没有设置过expire。
+> - `volatile-random`  随机算法，设置过expire的key都可能被清，小心使用。
+> - `allkeys-random`   随机算法，所有key都可能被移除，即使没有设置过expire，小心使用。
+> - `volatile-ttl`     设置过expire的那些key，具有TTL最小的key会被清。
+> - `noeviction(默认)`  无自动删除操作，内存使用到达上限时的写操作会被禁止。
 > 如无特别说明，LRU均指的是近似LRU算法的实现，LFU同理。客户端用`INFO`命令可查看服务器端占用内存状况。
 
 
@@ -118,9 +121,9 @@ Redis的key都是字符串，二进制安全。
 
 #### Q：Redis的安全性如何？
 > Redis支持密码登陆，即客户端使用`AUTH`命令发送口令到服务端进行验证，验证通过后才可进行数据库读写操作，否则只是处于连接状态，无法操作。客户端和服务端使用纯socket通信，没有其他的加密行为。
-> 如果Redis向外网开放，则会很危险。外网的客户端可尝试扫描各种端口进行连接，连接上后用穷举方式进行AUTH验证口令，只要通过了，就能进行操作了。Redis默认是没有绑定本机的，其他机器是可以连接的。
-> 如果Redis只向内网开放，再加密，就稍微安全些。毕竟攻击者需要先想办法进内网才能实施攻击。
+> 如果Redis向外网开放，会有危险。外网的客户端可尝试扫描各种端口进行连接，连接上后用穷举方式进行AUTH验证口令，只要通过了，就能进行操作了。Redis默认是没有绑定本机的，其他机器是可以连接的。
 > 如果可以，对服务端提供的危险指令进行删除或妥善处理，以防客户端误操作，比如`FLUSHALL`命令。
+> Redis虽然没有支持加密，但它推荐使用spiped在Redis服务器和客户端建立一个对称性加密的安全通道，单机和多机都可以布置，具体看[如何基于spiped建立一个安全的Redis集群](https://www.ibm.com/developerworks/cn/opensource/os-cn-spiped-redis/index.html?cm_mmc=dwchina-_-homepage-_-social-_-weibo)。
 > 再建议看看[Redis CrackIT 入侵事件分析](http://static.nosec.org/download/redis_crackit_v1.0.pdf)
 
 
@@ -129,15 +132,52 @@ Redis的key都是字符串，二进制安全。
 > 原理是，根据当前内存中的所有数据，生成新的AOF文件，在新文件成功生成完毕之前，旧的AOF文件不会被删除。重写工作由子进程处理，由于新进程的写时拷贝机制，所以不会内存翻倍或者时间效率问题。
 
 
+#### Q： Redis的主从架构是怎样的？
+> Redis支持**matster-slave**，就是主从架构，在master宕机时还有slave保存着绝大部分的数据，错漏数据极少，从而实现容灾。
+> **常见的架构是单master多slave**，且master和slave同时工作，然后slave仅读，master可读写，不过要知道这样会有产生读数据不同步隐患。slave启动后就会尝试去连接master，并以AOF文件的方式拷贝master的所有数据，之后master每有写命令就会发给slave进行数据同步。这样的架构很简单，master能感知所有slave，slave也知道master，而slave间都不互相感知。
+> 但是这样的架构的限制是，master下线(如断电)后其他slave能读不能写，一旦写了就会有数据不同步问题。Redis还提供了**sentinel**，即哨兵，在上面master-slave架构之外，还可以开一个至多个Redis作为哨兵，哨兵自己是不读写的，它们的作用仅仅是监督所有Redis的运行，在master下线时，哨兵能感知到它下线，然后由多个哨兵自动作出决策选举出一位slave成为新master。注意哨兵能感知哨兵和其他master与slave，当使用了哨兵监管之后的Redis架构就不存在永久的master了，必要时刻由哨兵决定谁是master。
+> 某台Redis可以作为以下三种中的一种：
+> - master
+> - slave
+> - sentinel
+> 上面讲的模型都是架构，其具体实现还有很多细节，比如怎样决策谁是master？slave刚连上master时拷贝数据时断开连接了怎么办？哨兵之间如何连接等等。更多细节不作深入探讨。
+
+
+#### Q：Redis的集群架构是怎样的？
+> Redis支持集群，就是多台Redis(称为分片)组成一个数据库，每个Redis仅保管整个库中的一部分数据，共同分担任务。某个key应该存在哪台Redis上是规定的，以算法(主要是CRC16)将key进行hash到某个槽slot，这个slot就编号决定了此key属于哪台Redis管辖。slot一共有16384个，每台Redis负责的所有slot编号是连续的。假如客户端发错给某个分片时，该分片会告知客户端去找xxx才对。这种架构下的每台Redis是可以互相感知对方的，当其中一台下线时，其他的仍能工作，但是该下线Redis负责的部分就不能存取了。
+> 注意，集群架构和主从架构不会冲突，可以为每个分片开一台slave，此时每个分片就是master了。更多细节不作深入探讨。
+
+
+#### Q：Redis的复制过程是怎样的？
+> 当某台Redis实例收到`SLAVEOF`命令后，就变成slave，并分两部分进行复制：
+> - slave服务器向主服务器发送`SYNC`命令，接到命令后的master服务器会调用`BGSAVE`命令创建一个RDB文件，此过程中会使用缓冲区记录接下来执行的所有写命令。
+> - 当完成RDB文件后就发送给slave服务器，slave便会接收并载入此文件，然后master才会发缓冲区中记录的命令给slave。
+> 复制过程完成之后就是master向slave异步传输命令了，网络传输会有时延，故两台实例上的数据并非严格一致的。
+
+
+#### Q：Sentile如何判断某台Redis是否下线？如何选举领头Sentile？
+> 先说sentinel连接。单台sentinel运行后就会根据配置文件发现Redis实例(master)，master和slave都会有两条连接与sentinel相连，一条是命令连接，另一条是订阅连接。订阅连接用于发现其他sentinel，而发现其他sentinel后，任两个sentinel之间仅会有命令连接用于沟通事宜。`INFO`命令由sentinel发给master用于发现其他的slave，然后进行连接。
+> sentinel使用`PING`命令检测master、slave和sentinel，若对方没有回复(超时)或者回复错误，就会判断其下线。注意可能会有部分sentinel认为某master下线，部分认为其仍在线，sentinel不会将下线的实例选为master。实例的下线状态有两种：PFAIL(少量sentinel认为其下线)和FAIL(较多sentinel认为其下线)。"较多"具体是多少是可配置的，可以看出FAIL才是真的下线。
+> 当某master判断为FAIL时，sentinel们会对该实例进行故障转移，即选择并升级一个较好的slave为master，并控制其他slave复制此新master，以达到数据更加接近一致。等到之前下线的master再次上线时，它已被降级为slave。
+
+
 #### Q：Redis中有哪些进程和线程？各自的作用是什么？
-> 
+> 进程可能有3个：
+> - **主进程**，负责与客户端沟通，做决策。
+> - **子进程**，在RDB式持久化时创建，负责将数据打包写成RDB文件并写盘。
+> - **子进程**，在AOF重写时创建，负责将当前数据压缩成AOF文件并写盘。
+> 线程可能有2个：
+> - **主线程**，就是上面的主进程干的事，实现大部分操作，承担主要的角色。
+> - **子线程**，在AOF式`appendfsync everysec`持久化时创建，负责将该秒内的写操作同步到盘。
 
 
-#### Redis中服务端和客户端的网络通信使用什么协议通信？如何加密？
-> Redis与客户端是TCP连接，协议为RESP（REdis Serialization Protocol，Redis序列化协议），协议很简单，客户端操作得到的回复也很简单，可能会批量回复。它们的通信没有加密措施，直接用的tcp，很容易被利用。此外，可连接的的客户端个数很少，具体数字请看源码。
+#### Q：Redis中服务端和客户端的网络通信使用什么协议通信？
+> Redis与客户端是TCP连接，协议为RESP（REdis Serialization Protocol，Redis序列化协议），协议很简单，客户端操作得到的回复也很简单，可能会批量回复(就是multi操作时)。它们的通信没有加密措施，直接用基于tcp的socket。此外，接受客户端连接数很少(一般也用不到那么多个)，具体数字请看源码。
 > [Redis协议解析](https://my.oschina.net/coderknock/blog/993801)
 
 
+#### Q：Redis的事件驱动是怎样的？
+> Redis是基于Reactor模式的，其IO复用程序底层封装了evport、epoll、kqueue、select，优先级从左到右，有哪个就用哪个。对于套接字，事件分为读写事件，若一个套接字同时可读写，则优先读而后写。
 
 
 
