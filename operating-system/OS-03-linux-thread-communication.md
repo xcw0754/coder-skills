@@ -1,6 +1,6 @@
 # 进程间通信方式
 
-进程间通信(Inter-Process Communication)的方式有：管道、信号、消息队列、共享内存、信号量、套接字。
+进程间通信(Inter-Process Communication)的方式有：管道与FIFO、信号与信号量、消息队列、共享内存、套接字。
 
 -----
 ### 管道
@@ -118,7 +118,7 @@ semaphore.release()
 
 共享内存的两种方式为mmap和shm。
 
-**mmap**是POSIX的内存映射方式。它的原型是这样的`void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);`，其中prot指定了创建的内存的保护方式，如可执行、可读、可写等等，fd指定了一个文件，offset指定了文件偏移，length指定了映射内存的大小，flags可以指定很多内存的属性以及如下两种映射方式：
+**mmap**是一种内存映射方式，它的原型是这样的`void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);`，其中prot指定了创建的内存的保护方式，如可执行、可读、可写等等，fd指定了一个文件，offset指定了文件偏移，length指定了映射内存的大小，flags可以指定很多内存的属性以及如下两种映射方式：
 
 - 私有映射。这是一种写时复制机制，每个进程在写操作后将独自拥有一份拷贝。
 - 共享映射。这是普通的共享内存，所有共享者都操作同一份内存。
@@ -132,7 +132,7 @@ semaphore.release()
 
 
 
-shm另一内存映射方式，它可以将多个进程的不同虚拟地址内存块映射到同一物理地址内存块上从而实现共享内存，映射起来比较简单。它用如下结构体表示一块共享内存：
+**shm**是另一内存映射方式，它可以将多个进程的不同虚拟地址内存块映射到同一物理地址内存块上从而实现共享内存，映射起来比较简单。它用如下结构体表示一块共享内存：
 ```
 struct shmid_ds {
                struct ipc_perm shm_perm;
@@ -152,7 +152,16 @@ shm方式的两个关键操作：
 很明显，以上两种共享内存都是基于进程的，这一点不同于消息队列。可参考[shared memory](http://users.cs.cf.ac.uk/Dave.Marshall/C/node27.html)
 
 
+-----
+### 套接字
 
+套接字常用于网络中不同机器之间的进程通信，但是它也可以用于单机的进程之间的通信，一个socket表示一个endpoint，它的唯一标识是`ip + port`，这样其实也就指定了正工作在该port上的一个进程。
+
+
+消息传递（管道、FIFO、消息队列）
+同步（互斥量、条件变量、读写锁、文件和写记录锁、信号量）
+共享内存（匿名的和具名的）
+远程过程调用（Solaris门和Sun RPC）	
 
 
 
