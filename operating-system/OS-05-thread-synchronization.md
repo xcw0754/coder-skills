@@ -43,7 +43,11 @@ unlock(mutex);
 - 2、real_wait(condVar);
 - 3、lock(mutex)
 
-所以这样就可能会有多个线程同时阻塞在real_wait处了，此时某个线程可以选择唤醒其中一个或者全部等待线程。
+所以这样就可能会有多个线程同时阻塞在real_wait处了，此时某个线程可以选择唤醒其中一个或者全部等待线程。条件变量的资料比较少，下面两个页面可以参考。
+
+- [Conditional Variable vs Semaphore](https://stackoverflow.com/questions/3513045/)
+- [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)
+
 
 
 ### 令牌
