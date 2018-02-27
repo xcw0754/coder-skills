@@ -5,3 +5,4 @@
 - Linux内存管理机制	`OS-02-linux-memory-management.md`
 - 进程间通信方式	`OS-03-linux-thread-communication.md`
 - 进程与线程	`OS-04-linux-thread-and-pthread.md`
+- 线程同步	`OS-05-thread-synchronization.md`
